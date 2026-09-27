@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
+    "build": "node scripts/build-site.mjs",
     "build:site": "node scripts/build-site.mjs"
   }
 }
