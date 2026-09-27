@@ -30,7 +30,13 @@ async function writeRecords(records) {
   await fs.writeFile(recordsFile, JSON.stringify(records, null, 2));
 }
 function send(res, status, body, type = 'application/json; charset=utf-8') {
-  res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' });
+  res.writeHead(status, {
+    'Content-Type': type,
+    'Cache-Control': 'no-store',
+    'Access-Control-Allow-Origin': process.env.CORS_ORIGIN || '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type'
+  });
   res.end(Buffer.isBuffer(body) || typeof body === 'string' ? body : JSON.stringify(body));
 }
 function readBody(req) {
@@ -97,6 +103,7 @@ async function askArchive(question) {
   } catch { return { inScope: true, ...fallback, mode: 'source-guided fallback' }; }
 }
 http.createServer(async (req, res) => {
+  if (req.method === 'OPTIONS') return send(res, 204, '');
   const url = new URL(req.url, `http://${req.headers.host}`);
   if (url.pathname === '/api/health') return send(res, 200, { status: 'healthy', service: 'samvidhan-archive' });
   if (url.pathname === '/api/records' && req.method === 'GET') return send(res, 200, await readRecords());

@@ -10,7 +10,7 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(path.join(dist, 'server'), { recursive: true });
 await cp(path.join(root, 'worker.js'), path.join(dist, 'server', 'index.js'));
 await writeFile(path.join(dist, 'server', 'package.json'), JSON.stringify({ type: 'module' }));
-for (const file of ['index.html', 'login.html', 'signup.html', 'pre.html', 'archive.html', 'admin.html']) {
+for (const file of ['index.html', 'login.html', 'signup.html', 'pre.html', 'archive.html', 'admin.html', 'api-config.js']) {
   await cp(path.join(root, file), path.join(client, file), { recursive: true });
 }
 await cp(path.join(root, 'assets'), path.join(client, 'assets'), { recursive: true });
