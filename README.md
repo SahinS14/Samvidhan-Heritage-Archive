@@ -123,6 +123,16 @@ Open [http://127.0.0.1:4173](http://127.0.0.1:4173).
 
 The hosted deployment uses an edge-compatible archive service for the visitor-facing experience: live Internet Archive discovery and the scope-controlled research assistant. Native Tesseract OCR and local catalogue writes remain on the institutional archive server, where scans and preservation storage are managed. This keeps the public discovery experience fast while protecting archival operations behind the institution’s server boundary.
 
+### Full institutional deployment with Render
+
+For a complete public deployment—including native OCR—use the included Docker setup. Render detects `render.yaml`, builds the `Dockerfile`, installs Tesseract and runs the same Node archive server used locally.
+
+1. Create a new Render Blueprint from this GitHub repository.
+2. Set `OPENAI_API_KEY` as a secret environment variable to enable the AI research assistant.
+3. Deploy. Render uses `/api/health` to check service health and provides the public URL.
+
+The service honours Render’s assigned `PORT`; no code changes are needed after connection.
+
 ### Optional configuration
 
 ```bash

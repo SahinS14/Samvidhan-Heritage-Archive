@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: samvidhan-heritage-archive
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-6-astra
