@@ -1,0 +1,9 @@
+{
+  "name": "samvidhan-heritage-archive",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "build:site": "node scripts/build-site.mjs"
+  }
+}

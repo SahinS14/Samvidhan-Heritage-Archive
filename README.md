@@ -119,6 +119,10 @@ node server.js
 
 Open [http://127.0.0.1:4173](http://127.0.0.1:4173).
 
+### Hosted preview
+
+The hosted deployment uses an edge-compatible archive service for the visitor-facing experience: live Internet Archive discovery and the scope-controlled research assistant. Native Tesseract OCR and local catalogue writes remain on the institutional archive server, where scans and preservation storage are managed. This keeps the public discovery experience fast while protecting archival operations behind the institution’s server boundary.
+
 ### Optional configuration
 
 ```bash
@@ -170,4 +174,3 @@ This is not just a visual archive concept. The working prototype demonstrates th
 **discover a public record → study a collection → ask a constrained research question → digitise a new scan → catalogue it for future researchers.**
 
 It is built as a practical foundation for an institutional, trustworthy and accessible digital heritage platform that brings Ambedkar’s ideas closer to students, researchers and the public.
-
