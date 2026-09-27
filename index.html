@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#020405" />
+    <meta name="description" content="Samvidhan Heritage Archive — secure access portal." />
+    <title>Samvidhan Heritage Archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        background: #020405;
+        color: #f7f8fa;
+        font-family: Inter, system-ui, sans-serif;
+      }
+      .portal {
+        isolation: isolate;
+        min-height: 100svh;
+        overflow: hidden;
+        position: relative;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        background:
+          linear-gradient(180deg, #020405 0%, #020405 28%, rgba(2, 4, 5, .88) 43%, rgba(2, 4, 5, .12) 68%, rgba(2, 4, 5, .35) 100%),
+          linear-gradient(90deg, rgba(2, 4, 5, .65), transparent 26%, transparent 75%, rgba(2, 4, 5, .5)),
+          url("assets/landing.jpg") center bottom / cover no-repeat;
+      }
+      .portal::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        inset: auto 0 0;
+        height: 34%;
+        background: linear-gradient(0deg, rgba(2, 6, 10, .58), transparent);
+        pointer-events: none;
+      }
+      .mark {
+        position: absolute;
+        top: 50px;
+        left: 55px;
+        width: 26px;
+        height: 26px;
+        border: 2px solid rgba(211, 218, 220, .68);
+        border-radius: 50%;
+        opacity: .92;
+      }
+      .mark::before, .mark::after {
+        content: "";
+        position: absolute;
+        inset: 4px 11px;
+        border-left: 1px solid rgba(211, 218, 220, .72);
+        border-right: 1px solid rgba(211, 218, 220, .72);
+      }
+      .mark::after { transform: rotate(90deg); }
+      .entry {
+        width: min(690px, calc(100% - 40px));
+        align-self: center;
+        justify-self: center;
+        margin-top: 18px;
+        text-align: center;
+        padding-bottom: 155px;
+      }
+      .eyebrow {
+        color: #9fa0a7;
+        display: block;
+        font-size: 1.08rem;
+        font-weight: 400;
+        letter-spacing: .015em;
+        margin-bottom: 13px;
+      }
+      h1 {
+        margin: 0;
+        color: #fff;
+        font-size: clamp(2.25rem, 4.15vw, 3.38rem);
+        font-weight: 700;
+        letter-spacing: -.055em;
+        line-height: 1.11;
+      }
+      .enter {
+        appearance: none;
+        border: 0;
+        border-radius: 999px;
+        background: #f7f7f8;
+        box-shadow: 0 14px 38px rgba(0, 0, 0, .52), 0 0 0 1px rgba(255,255,255,.1) inset;
+        color: #111216;
+        display: inline-flex;
+        align-items: center;
+        gap: 13px;
+        margin-top: 38px;
+        padding: 18px 39px;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1;
+        transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      }
+      .enter:hover { transform: translateY(-3px); box-shadow: 0 19px 45px rgba(0,0,0,.65); background: #fff; }
+      .enter:focus-visible { outline: 3px solid #7fd7ec; outline-offset: 4px; }
+      .enter-icon { font-size: 1.36rem; line-height: .8; transform: translateY(-1px); }
+      .notice {
+        color: #a8a9ae;
+        font-size: .9rem;
+        line-height: 1.65;
+        margin: 26px auto 0;
+        max-width: 575px;
+      }
+      .notice a { color: #d4d4d7; text-decoration-color: rgba(212,212,215,.58); text-underline-offset: 3px; }
+      .status {
+        min-height: 20px;
+        margin-top: 14px;
+        color: #95d9eb;
+        font-size: .76rem;
+        opacity: 0;
+        transition: opacity .2s ease;
+      }
+      .status.visible { opacity: 1; }
+      @media (max-width: 700px) {
+        .portal {
+          background-position: 58% bottom;
+          background-image:
+            linear-gradient(180deg, #020405 0%, #020405 25%, rgba(2, 4, 5, .88) 47%, rgba(2, 4, 5, .24) 72%, rgba(2, 4, 5, .5) 100%),
+            url("assets/landing.jpg");
+        }
+        .mark { top: 27px; left: 26px; }
+        .entry { align-self: start; margin-top: 155px; padding-bottom: 80px; }
+        .eyebrow { font-size: .95rem; }
+        .notice { font-size: .78rem; max-width: 360px; }
+        .enter { margin-top: 31px; padding: 17px 28px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="portal">
+      <span class="mark" aria-label="Samvidhan Heritage Archive"></span>
+      <section class="entry" aria-labelledby="portal-title">
+        <span class="eyebrow">Log in to access</span>
+        <h1 id="portal-title">Samvidhan Heritage Archive</h1>
+        <a class="enter" id="enter-button" href="login.html">
+          <span class="enter-icon" aria-hidden="true">↪</span>
+          Enter into the World
+        </a>
+        <p class="notice">
+          This portal provides secure access to the Digital Constitution &amp; Ambedkar<br class="wide-break" /> Archive.<br />
+          You can review our <a href="#privacy">Privacy Policy</a> &amp; <a href="#access">Institutional Access</a>.
+        </p>
+      </section>
+    </main>
+    <script>
+    </script>
+  </body>
+</html>

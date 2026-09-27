@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_blank" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;family=Space+Grotesk:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+.phase-slide {
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.phase-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+  transform: translateY(0);
+  z-index: 10;
+}
+.phase-slide.inactive {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(12px);
+  z-index: 0;
+}
+.glow-amber {
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.55), 0 0 3px rgba(245, 158, 11, 0.8);
+}
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-container":"#f59e0b","surface-container":"#1d2025","secondary-fixed":"#c4e7ff","inverse-surface":"#e2e2ea","tertiary":"#c7c8ff","surface-tint":"#ffb95f","on-secondary-fixed":"#001e2c","on-error-container":"#ffdad6","on-primary-fixed":"#2a1700","surface-container-low":"#191c21","on-secondary-container":"#00374d","surface-container-highest":"#33353b","inverse-on-surface":"#2e3036","on-tertiary-container":"#2b29bb","tertiary-fixed-dim":"#c0c1ff","on-primary-fixed-variant":"#653e00","inverse-primary":"#855300","on-secondary-fixed-variant":"#004c69","surface-variant":"#33353b","on-surface":"#e2e2ea","on-background":"#e2e2ea","background":"#111319","surface-container-lowest":"#0c0e13","outline":"#a08e7a","primary-fixed-dim":"#ffb95f","secondary-fixed-dim":"#7bd0ff","on-error":"#690005","on-primary":"#472a00","tertiary-container":"#a7a9ff","secondary":"#7bd0ff","secondary-container":"#00a6e0","primary-fixed":"#ffddb8","on-tertiary-fixed-variant":"#2f2ebe","on-primary-container":"#613b00","on-surface-variant":"#d8c3ad","surface-bright":"#37393f","on-tertiary-fixed":"#07006c","error-container":"#93000a","surface-dim":"#111319","surface":"#111319","on-tertiary":"#1000a9","outline-variant":"#534434","surface-container-high":"#282a30","tertiary-fixed":"#e1e0ff","on-secondary":"#00354a","error":"#ffb4ab","primary":"#ffc174"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-sm":"0.5rem","space-lg":"1.5rem","margin-mobile":"1.25rem",margin:"2.5rem","space-xl":"2.5rem",gutter:"1.5rem","gutter-compact":"0.75rem","space-md":"1rem","space-xs":"0.25rem","space-2xl":"4rem"},fontFamily:{"title-md":["Space Grotesk"],"headline-md":["Playfair Display"],"display-hero-mobile":["Playfair Display"],"label-badge":["JetBrains Mono"],"headline-lg":["Playfair Display"],"body-lg":["Space Grotesk"],"headline-lg-mobile":["Playfair Display"],"body-sm":["Space Grotesk"],"label-code":["JetBrains Mono"],"display-hero":["Playfair Display"],"body-md":["Space Grotesk"],"headline-sm":["Space Grotesk"]},fontSize:{"title-md":["16px",{lineHeight:"24px",letterSpacing:"0.02em",fontWeight:"600"}],"headline-md":["26px",{lineHeight:"34px",fontWeight:"600"}],"display-hero-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.01em",fontWeight:"700"}],"label-badge":["10px",{lineHeight:"12px",letterSpacing:"0.1em",fontWeight:"700"}],"headline-lg":["38px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-lg":["17px",{lineHeight:"26px",fontWeight:"400"}],"headline-lg-mobile":["28px",{lineHeight:"36px",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"18px",fontWeight:"400"}],"label-code":["12px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"500"}],"display-hero":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"22px",fontWeight:"400"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"0.01em",fontWeight:"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-container selection:text-on-primary-container"><main class="w-full min-h-screen bg-surface flex flex-col justify-center items-center"><div class="flex flex-col w-full relative overflow-hidden select-none">
+<!-- Cinematic Ambient Canvas Backing -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-surface-container-lowest">
+<div class="absolute inset-0 bg-cover bg-center opacity-30 transform scale-105 filter blur-sm transition-all duration-1000" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1UabKqO71fvyvEfHc8e8JZdNy00v4euOFnaEwH3vf6fDwUStzrxhyjnepYDnRkdXLuIWsVmOOnYT7u2uKGQPBxuBD3AnNP-TmxC7dPlnSXNeNEMWqAjAzjw_9FsaxkXiXZBIkxHNJKaKLUlH3ndlWDMMG1b6UrmGNk-BUlMDYypkvjWUA8irscaAehwWsSC9eZsy29D0sIdlFnYoQiBM1eRCc7QyEVrhpPF3pQZwxXJAzpbodFjO67x');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/85 to-surface-container-lowest/90"></div>
+<div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary/10 filter blur-3xl pointer-events-none animate-pulse"></div>
+<div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-secondary/10 filter blur-3xl pointer-events-none"></div>
+<!-- Micro Dust / Star Telemetry Particles -->
+<svg class="absolute inset-0 w-full h-full opacity-25" xmlns="http://www.w3.org/2000/svg">
+<circle class="animate-ping" cx="15%" cy="22%" fill="#f59e0b" r="1" style="animation-duration: 4s;"></circle>
+<circle class="animate-pulse" cx="85%" cy="18%" fill="#7bd0ff" r="1.5" style="animation-duration: 3s;"></circle>
+<circle class="animate-ping" cx="45%" cy="80%" fill="#f59e0b" r="1" style="animation-duration: 6s;"></circle>
+<circle class="animate-pulse" cx="75%" cy="65%" fill="#ffddb8" r="1.2" style="animation-duration: 5s;"></circle>
+<circle class="animate-ping" cx="28%" cy="54%" fill="#7bd0ff" r="1" style="animation-duration: 7s;"></circle>
+</svg>
+</div>
+<!-- Main Cinematic Frame -->
+<div class="relative z-10 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin min-h-[92vh] flex flex-col justify-between py-space-md">
+<!-- Top Telemetry & Status Strip -->
+<header class="flex items-center justify-between w-full pb-space-sm">
+<div class="flex items-center space-x-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse shadow-sm"></span>
+<span class="font-label-code text-label-code text-on-surface-variant uppercase tracking-wider">
+          ARCHIVAL GATEWAY <span class="text-primary-container">::</span> VERIFIED CREDENTIALS
+        </span>
+</div>
+<div class="flex items-center space-x-space-md">
+<div class="hidden sm:flex items-center space-x-space-xs font-label-badge text-label-badge bg-surface-container px-space-sm py-1 rounded">
+<span class="text-secondary">ENCRYPTED PROTOCOL</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface">CAD-1949-ARCHIVE</span>
+</div>
+<button class="group flex items-center space-x-1.5 px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface hover:text-primary" id="skip-btn" onclick="directEntry()">
+<span class="font-label-code text-label-code">SKIP INTRO</span>
+<span class="material-symbols-outlined text-sm transform group-hover:translate-x-0.5 transition-transform">fast_forward</span>
+</button>
+</div>
+</header>
+<!-- Central Carousel Display -->
+<main class="w-full my-auto flex flex-col items-center">
+<!-- Stepper / Phase Visual Indicators -->
+<nav aria-label="Constitutional Timeline Phases" class="w-full max-w-4xl flex items-center justify-between mb-space-lg relative">
+<!-- Connecting Line -->
+<div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 bg-surface-container-high z-0"></div>
+<div class="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 bg-primary-container transition-all duration-700 ease-out z-0" id="step-fill-line" style="width: 0%;"></div>
+<!-- Step 1 -->
+<button class="phase-indicator relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none" onclick="setPhase(0)">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-label-code text-label-code flex items-center justify-center font-bold shadow-md transition-all duration-300 transform scale-110 glow-amber">
+            01
+          </div>
+<span class="absolute top-10 font-label-code text-label-badge text-primary-container whitespace-nowrap hidden md:block">1891–1923</span>
+</button>
+<!-- Step 2 -->
+<button class="phase-indicator relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none" onclick="setPhase(1)">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-label-code text-label-code flex items-center justify-center font-bold shadow-sm transition-all duration-300">
+            02
+          </div>
+<span class="absolute top-10 font-label-code text-label-badge text-on-surface-variant whitespace-nowrap hidden md:block">1927</span>
+</button>
+<!-- Step 3 -->
+<button class="phase-indicator relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none" onclick="setPhase(2)">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-label-code text-label-code flex items-center justify-center font-bold shadow-sm transition-all duration-300">
+            03
+          </div>
+<span class="absolute top-10 font-label-code text-label-badge text-on-surface-variant whitespace-nowrap hidden md:block">1931–1932</span>
+</button>
+<!-- Step 4 -->
+<button class="phase-indicator relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none" onclick="setPhase(3)">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-label-code text-label-code flex items-center justify-center font-bold shadow-sm transition-all duration-300">
+            04
+          </div>
+<span class="absolute top-10 font-label-code text-label-badge text-on-surface-variant whitespace-nowrap hidden md:block">1946–1949</span>
+</button>
+<!-- Step 5 -->
+<button class="phase-indicator relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none" onclick="setPhase(4)">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant font-label-code text-label-code flex items-center justify-center font-bold shadow-sm transition-all duration-300">
+            05
+          </div>
+<span class="absolute top-10 font-label-code text-label-badge text-on-surface-variant whitespace-nowrap hidden md:block">1950+</span>
+</button>
+</nav>
+<!-- Dynamic Milestone Card Presentation -->
+<section class="w-full max-w-5xl relative min-h-[380px] md:min-h-[420px] flex items-center justify-center"><!-- Phase 0: Scholar & Inquest (1891-1923) -->
+<article class="phase-slide active w-full" id="slide-0">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-stretch">
+<!-- Archival Photograph Visual Anchor -->
+<div class="md:col-span-6 bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden shadow-xl border border-outline-variant/30">
+<div class="relative w-full aspect-[16/10] md:aspect-auto md:h-64 rounded-lg overflow-hidden border border-outline/30 bg-surface-container-lowest group shadow-inner">
+<img alt="Young Dr. B. R. Ambedkar as scholar at Columbia University and LSE" class="w-full h-full object-cover object-center filter sepia-[0.35] contrast-105 hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1UQLPK0QoN3gdH6fwdlUPyxF-Iw5Fkim6ytiIK-zOy0sZnulJOFIRvAkApj-o4mkPYR8LRWJCTV_amRXlN2GmNJBrG2jZLHpRI4U9Vah-fN6B7ZYlhBK9mRgHceEDPNsadVWvaLI8BWP97ZxNhwKKQap-HVMIWMLAg7EZe5MFYvFPxKuAvioHZVdoM4Uc6MjMDGAIef6xwTDCeaQ_A0APLzmhScne4HqUScUR8xbENpYc7mTY7U80M"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-primary font-label-code text-label-badge border border-primary/20 flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-xs text-primary">verified</span>
+<span>ARCHIVE REF: NY-COL-1916/SCH</span>
+</div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant font-label-code text-label-badge border border-outline-variant/40">
+          Columbia Library • New York
+        </div>
+</div>
+<div class="pt-space-sm">
+<div class="flex justify-between items-center text-label-badge font-label-code text-outline py-1">
+<span class="text-secondary flex items-center space-x-1"><span class="material-symbols-outlined text-xs">school</span><span>DOCTOR OF LAWS • M.A. • M.SC • PH.D • D.SC • BAR-AT-LAW</span></span>
+<span class="text-primary font-bold">1891 — 1923</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden mt-1">
+<div class="h-full bg-primary-container rounded-full" style="width: 20%;"></div>
+</div>
+</div>
+</div>
+<!-- Information & Theoretical Foundation -->
+<div class="md:col-span-6 bg-surface-container/90 backdrop-blur-md p-space-lg rounded-xl flex flex-col justify-between shadow-xl border border-outline-variant/20">
+<div>
+<div class="flex items-center space-x-2 mb-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary font-label-code text-label-badge">ERA 01 / SCHOLASTIC GENESIS</span>
+<span class="text-outline font-label-code text-label-badge">COLUMBIA • LSE • GRAY'S INN</span>
+</div>
+<h2 class="font-headline-lg text-headline-md md:text-headline-lg text-primary mb-space-xs">Scholar &amp; Inquest</h2>
+<h3 class="font-headline-sm text-title-md text-on-surface-variant mb-space-sm">Columbia University &amp; London School of Economics</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface mb-space-md leading-relaxed">
+          Immersed in relentless scholarship at Columbia University and London School of Economics, Dr. Ambedkar authored foundational economic treatises and mastered jurisprudence to dismantle social inequality.
+        </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg border-l-2 border-primary-container">
+<p class="font-headline-md text-headline-sm italic text-primary-fixed-dim leading-snug">
+          “My life is a battle for the liberation of my people. Knowledge is the foundation upon which that freedom will be built.”
+        </p>
+<span class="block mt-2 font-label-code text-label-badge text-outline uppercase tracking-wider">— Doctoral Research Folio, 1916</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Phase 1: Civil Dignity & Awakening (1927) -->
+<article class="phase-slide inactive w-full" id="slide-1">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-stretch">
+<!-- Archival Photograph Visual Anchor -->
+<div class="md:col-span-6 bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden shadow-xl border border-outline-variant/30">
+<div class="relative w-full aspect-[16/10] md:aspect-auto md:h-64 rounded-lg overflow-hidden border border-outline/30 bg-surface-container-lowest group shadow-inner">
+<img alt="Dr. B. R. Ambedkar leading Mahad Satyagraha drinking from Chavdar Lake in 1927" class="w-full h-full object-cover object-center filter sepia-[0.3] contrast-105 hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1W-Z07aWHaiLRa4NggcoQ8LC9mrxJJMzWjyxTJhoASTyezeQW66yHdLn6_zUOd5r8yxixGk6JLSVF8M_b0_909HBmernmJD1SujIFPB98YKPXpU1D3e7fuAte0QQmfW6bqQPdhuC7odv0sbKKHiAn4HTYV-bUxGHTC484n-NVw9REC28eB3cGlWPg-FL6aFCL3adysM87n9qB5jB1iYEZJLW7zUk6ub4xR1jT_WykEV7u4Mc3QSJyGT"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-primary font-label-code text-label-badge border border-primary/20 flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-xs text-primary">verified</span>
+<span>ARCHIVE REF: MHD-SAT-1927/CVR</span>
+</div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant font-label-code text-label-badge border border-outline-variant/40">
+          Chavdar Tank • Mahad
+        </div>
+</div>
+<div class="pt-space-sm">
+<div class="flex justify-between items-center text-label-badge font-label-code text-outline py-1">
+<span class="text-secondary flex items-center space-x-1"><span class="material-symbols-outlined text-xs">water_drop</span><span>FIRST CIVIL RIGHTS MOVEMENT • 20 MARCH 1927</span></span>
+<span class="text-primary font-bold">MARCH 20, 1927</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden mt-1">
+<div class="h-full bg-primary-container rounded-full" style="width: 40%;"></div>
+</div>
+</div>
+</div>
+<!-- Information & Civil Rights Foundation -->
+<div class="md:col-span-6 bg-surface-container/90 backdrop-blur-md p-space-lg rounded-xl flex flex-col justify-between shadow-xl border border-outline-variant/20">
+<div>
+<div class="flex items-center space-x-2 mb-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary font-label-code text-label-badge">ERA 02 / CIVIL AWAKENING</span>
+<span class="text-outline font-label-code text-label-badge">CIVIL DISOBEDIENCE FOR DIGNITY</span>
+</div>
+<h2 class="font-headline-lg text-headline-md md:text-headline-lg text-primary mb-space-xs">Civil Dignity &amp; Awakening</h2>
+<h3 class="font-headline-sm text-title-md text-on-surface-variant mb-space-sm">Historic Mahad Satyagraha at Chavdar Lake</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface mb-space-md leading-relaxed">
+          Leading thousands to drink water from the public Chavdar Lake on 20th March 1927, transforming a fight for drinking water into an epochal battle for fundamental human dignity and universal human rights.
+        </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg border-l-2 border-primary-container">
+<p class="font-headline-md text-headline-sm italic text-primary-fixed-dim leading-snug">
+          “We are not going to the tank merely to drink water. We are going to establish that we are human beings like all others.”
+        </p>
+<span class="block mt-2 font-label-code text-label-badge text-outline uppercase tracking-wider">— Mahad Historic Address, 20 March 1927</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Phase 2: Political Representation & Poona Pact (1931-1932) -->
+<article class="phase-slide inactive w-full" id="slide-2">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-stretch">
+<!-- Archival Photograph Visual Anchor -->
+<div class="md:col-span-6 bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden shadow-xl border border-outline-variant/30">
+<div class="relative w-full aspect-[16/10] md:aspect-auto md:h-64 rounded-lg overflow-hidden border border-outline/30 bg-surface-container-lowest group shadow-inner">
+<img alt="Dr. B. R. Ambedkar at the Round Table Conference in London 1931-1932" class="w-full h-full object-cover object-center filter sepia-[0.25] contrast-105 hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1W3R6J2ywZLsFaR2evMuMZsKz-tfxW73_eO1rgBr-RJgYHex7YaWsAQUPr3Jbt83iy667quvwwzxAIF3ztCFWMhflqh9OnmNYQ0pmlsVEN5U0ifJ24uGxHwxzS_pmCu3A8R-71IT1DxbImexwz2V46s4Tm-usQFs1wE1cknxLxImpYTIufDgcuZ0k9ERp01WzwE4eveEnDUrbzH85Qw6qUqsXqmufn2pQc86CbblPhvyiHld8KUIgY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-primary font-label-code text-label-badge border border-primary/20 flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-xs text-primary">verified</span>
+<span>ARCHIVE REF: LON-RTC-1931/STJ</span>
+</div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant font-label-code text-label-badge border border-outline-variant/40">
+          St. James's Palace • London
+        </div>
+</div>
+<div class="pt-space-sm">
+<div class="flex justify-between items-center text-label-badge font-label-code text-outline py-1">
+<span class="text-secondary flex items-center space-x-1"><span class="material-symbols-outlined text-xs">how_to_vote</span><span>ELECTORAL SOVEREIGNTY • 1931 - 1932</span></span>
+<span class="text-primary font-bold">1931 — 1932</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden mt-1">
+<div class="h-full bg-primary-container rounded-full" style="width: 60%;"></div>
+</div>
+</div>
+</div>
+<!-- Information & Global Bargaining -->
+<div class="md:col-span-6 bg-surface-container/90 backdrop-blur-md p-space-lg rounded-xl flex flex-col justify-between shadow-xl border border-outline-variant/20">
+<div>
+<div class="flex items-center space-x-2 mb-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary font-label-code text-label-badge">ERA 03 / GLOBAL NEGOTIATION</span>
+<span class="text-outline font-label-code text-label-badge">ROUND TABLE CONFERENCES • YERWADA</span>
+</div>
+<h2 class="font-headline-lg text-headline-md md:text-headline-lg text-primary mb-space-xs">Political Representation</h2>
+<h3 class="font-headline-sm text-title-md text-on-surface-variant mb-space-sm">Round Table Conferences &amp; Poona Pact</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface mb-space-md leading-relaxed">
+          Argued unyielding constitutional safeguards before the British Crown and national leaders at the London Round Table Conferences, securing legislative seats and fundamental representation.
+        </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg border-l-2 border-primary-container">
+<p class="font-headline-md text-headline-sm italic text-primary-fixed-dim leading-snug">
+          “I have no homeland, yet I will forge one where every soul stands equal.”
+        </p>
+<span class="block mt-2 font-label-code text-label-badge text-outline uppercase tracking-wider">— Round Table Plenary Session, 1931</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Phase 3: Architect of the Republic (1946-1949) -->
+<article class="phase-slide inactive w-full" id="slide-3">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-stretch">
+<!-- Archival Photograph Visual Anchor -->
+<div class="md:col-span-6 bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden shadow-xl border border-outline-variant/30">
+<div class="relative w-full aspect-[16/10] md:aspect-auto md:h-64 rounded-lg overflow-hidden border border-outline/30 bg-surface-container-lowest group shadow-inner">
+<img alt="Dr. B. R. Ambedkar presenting the Constitution in the Constituent Assembly in 1949" class="w-full h-full object-cover object-center filter sepia-[0.2] contrast-105 hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1UFTtcrm57Nue-8J8n1tIHW8VRDGXYTSNdSmPDIAbUso4eI5umtXvX8Jp1qovaix06zUllw1qwvEUMUEN_8vCHjDipyfpNIy7CLY0T20tci_qI92uQRizBbJObyhYa0pWfoWcI8xbkUj2l25cBCjp0po9n065vspbPtdEYOFwRFMPcYl5gbknoFpzIdw5u2C4fiP4bekxg6WvhLnlWpNNtn6rGvTPBfvArugDXj_KPrtLlog-PsaBM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-primary font-label-code text-label-badge border border-primary/20 flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-xs text-primary">verified</span>
+<span>ARCHIVE REF: CAD-DEL-1949/CNH</span>
+</div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant font-label-code text-label-badge border border-outline-variant/40">
+          Constitution Hall • New Delhi
+        </div>
+</div>
+<div class="pt-space-sm">
+<div class="flex justify-between items-center text-label-badge font-label-code text-outline py-1">
+<span class="text-secondary flex items-center space-x-1"><span class="material-symbols-outlined text-xs">draw</span><span>DRAFTING COMMITTEE CHAIRMAN • 1946 - 1949</span></span>
+<span class="text-primary font-bold">1946 — 1949</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden mt-1">
+<div class="h-full bg-primary-container rounded-full" style="width: 80%;"></div>
+</div>
+</div>
+</div>
+<!-- Information & Constitutional Craft -->
+<div class="md:col-span-6 bg-surface-container/90 backdrop-blur-md p-space-lg rounded-xl flex flex-col justify-between shadow-xl border border-outline-variant/20">
+<div>
+<div class="flex items-center space-x-2 mb-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary font-label-code text-label-badge">ERA 04 / CONSTITUTIONAL CRAFT</span>
+<span class="text-outline font-label-code text-label-badge">CHAIRING 141 DRAFTING SITTINGS</span>
+</div>
+<h2 class="font-headline-lg text-headline-md md:text-headline-lg text-primary mb-space-xs">Architect of the Republic</h2>
+<h3 class="font-headline-sm text-title-md text-on-surface-variant mb-space-sm">Presenting the Constitution to the Assembly</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface mb-space-md leading-relaxed">
+          As Chairman of the Drafting Committee, Dr. Ambedkar piloted 395 Articles through exhaustive Constituent Assembly Debates, synthesizing liberty, equality, and fraternity into an enduring document.
+        </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg border-l-2 border-primary-container">
+<p class="font-headline-md text-headline-sm italic text-primary-fixed-dim leading-snug">
+          “Constitution is not a mere lawyer's document, it is the vehicle of Life, and its spirit is always the spirit of Age.”
+        </p>
+<span class="block mt-2 font-label-code text-label-badge text-outline uppercase tracking-wider">— Assembly Debates, 4 November 1948</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Phase 4: The Living Samvidhan (1950 & Beyond) -->
+<article class="phase-slide inactive w-full" id="slide-4">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-stretch">
+<!-- Archival Photograph Visual Anchor -->
+<div class="md:col-span-6 bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden shadow-xl border border-outline-variant/30">
+<div class="relative w-full aspect-[16/10] md:aspect-auto md:h-64 rounded-lg overflow-hidden border border-outline/30 bg-surface-container-lowest group shadow-inner">
+<img alt="Constituent Assembly and Living Constitution of India" class="w-full h-full object-cover object-center filter sepia-[0.25] contrast-105 hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1UFTtcrm57Nue-8J8n1tIHW8VRDGXYTSNdSmPDIAbUso4eI5umtXvX8Jp1qovaix06zUllw1qwvEUMUEN_8vCHjDipyfpNIy7CLY0T20tci_qI92uQRizBbJObyhYa0pWfoWcI8xbkUj2l25cBCjp0po9n065vspbPtdEYOFwRFMPcYl5gbknoFpzIdw5u2C4fiP4bekxg6WvhLnlWpNNtn6rGvTPBfvArugDXj_KPrtLlog-PsaBM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-primary font-label-code text-label-badge border border-primary/20 flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-xs text-primary">verified</span>
+<span>ARCHIVE REF: REP-IND-1950/LAW</span>
+</div>
+<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant font-label-code text-label-badge border border-outline-variant/40">
+          Central Hall • Parliament of India
+        </div>
+</div>
+<div class="pt-space-sm">
+<div class="flex justify-between items-center text-label-badge font-label-code text-outline py-1">
+<span class="text-secondary flex items-center space-x-1"><span class="material-symbols-outlined text-xs">menu_book</span><span>SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC</span></span>
+<span class="text-primary font-bold">1950 &amp; BEYOND</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden mt-1">
+<div class="h-full bg-primary-container rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+<!-- Information & Living Constitution -->
+<div class="md:col-span-6 bg-surface-container/90 backdrop-blur-md p-space-lg rounded-xl flex flex-col justify-between shadow-xl border border-outline-variant/20">
+<div>
+<div class="flex items-center space-x-2 mb-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-secondary font-label-code text-label-badge">ERA 05 / ETERNAL FOUNDATION</span>
+<span class="text-outline font-label-code text-label-badge">395 ARTICLES • PREAMBLE COMPACT</span>
+</div>
+<h2 class="font-headline-lg text-headline-md md:text-headline-lg text-primary mb-space-xs">The Living Samvidhan</h2>
+<h3 class="font-headline-sm text-title-md text-on-surface-variant mb-space-sm">Enactment &amp; Constitutional Morality</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface mb-space-md leading-relaxed">
+          On 26th January 1950, India became a sovereign republic governed by the rule of law. Babasaheb entrusted the future to citizens, declaring constitutional morality paramount.
+        </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg border-l-2 border-primary-container">
+<p class="font-headline-md text-headline-sm italic text-primary-fixed-dim leading-snug">
+          “Educate, Agitate, Organise. Have faith in yourselves.”
+        </p>
+<span class="block mt-2 font-label-code text-label-badge text-outline uppercase tracking-wider">— Historic Call to the Nation</span>
+</div>
+</div>
+</div>
+</article></section>
+<!-- Carousel Manual Navigation Toggles & Play/Pause Button -->
+<div class="flex items-center space-x-space-md mt-space-md">
+<button aria-label="Previous Phase" class="p-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface hover:text-primary transition-all active:scale-95" onclick="prevPhase()">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<!-- Play / Pause Toggle Button -->
+<button aria-label="Toggle Autoplay" class="flex items-center space-x-1.5 px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface hover:text-primary border border-outline-variant/30 transition-all active:scale-95 text-xs font-label-code" id="play-pause-btn" onclick="togglePlayPause()">
+<span class="material-symbols-outlined text-base" id="play-pause-icon">pause</span>
+<span id="play-pause-text">PAUSE</span>
+</button>
+<span class="font-label-code text-label-code text-on-surface-variant tracking-wider" id="slide-num-label">PHASE 01 / 05</span>
+<button aria-label="Next Phase" class="p-2 rounded bg-surface-container hover:bg-surface-container-high text-on-surface hover:text-primary transition-all active:scale-95" onclick="nextPhase()">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Bottom Action Console & Transition Countdown -->
+<footer class="w-full flex flex-col md:flex-row items-center justify-between pt-space-md gap-4">
+<!-- Automated Archival Telemetry Progress Tracker -->
+<div class="w-full md:w-1/2 flex flex-col space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-badge text-on-surface-variant">
+<span class="flex items-center space-x-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span>HISTORICAL TIMELINE SEQUENCE</span>
+</span>
+<span class="text-primary font-bold" id="countdown-text">ENTERING STUDY IN 4s...</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container transition-all ease-linear" id="countdown-bar" style="width: 0%; transition-duration: 50ms;"></div>
+</div>
+</div>
+<!-- Prominent Enter CTA -->
+<button class="w-full md:w-auto px-space-lg py-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-title-md text-title-md font-bold flex items-center justify-center space-x-2 shadow-xl hover:shadow-primary/20 transition-all transform active:scale-95 group" id="enter-btn" onclick="directEntry()">
+<span>ENTER DASHBOARD &amp; STUDY</span>
+<span class="material-symbols-outlined text-xl transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</footer>
+</div>
+<script>
+    (function() {
+      let currentPhase = 0;
+      const totalPhases = 5;
+      const phaseDurationMs = 3800; // ~3.8 seconds per phase
+      let isPaused = false;
+      let phaseTimeElapsed = 0;
+      const intervalTickMs = 40;
+      let timer = null;
+
+      const slides = [
+        document.getElementById('slide-0'),
+        document.getElementById('slide-1'),
+        document.getElementById('slide-2'),
+        document.getElementById('slide-3'),
+        document.getElementById('slide-4')
+      ];
+
+      const indicators = document.querySelectorAll('.phase-indicator');
+      const stepFillLine = document.getElementById('step-fill-line');
+      const countdownBar = document.getElementById('countdown-bar');
+      const countdownText = document.getElementById('countdown-text');
+      const slideNumLabel = document.getElementById('slide-num-label');
+      const playPauseIcon = document.getElementById('play-pause-icon');
+      const playPauseText = document.getElementById('play-pause-text');
+
+      function updateUI() {
+        slides.forEach((s, idx) => {
+          if (!s) return;
+          if (idx === currentPhase) {
+            s.classList.remove('inactive');
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+            s.classList.add('inactive');
+          }
+        });
+
+        indicators.forEach((ind, idx) => {
+          const circle = ind.querySelector('div');
+          const spanText = ind.querySelector('span');
+          if (!circle) return;
+
+          if (idx === currentPhase) {
+            circle.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+            circle.classList.add('bg-primary-container', 'text-on-primary', 'scale-110', 'glow-amber');
+            if (spanText) {
+              spanText.classList.remove('text-on-surface-variant');
+              spanText.classList.add('text-primary-container');
+            }
+          } else if (idx < currentPhase) {
+            circle.classList.remove('bg-surface-container-highest', 'text-on-surface-variant', 'scale-110', 'glow-amber');
+            circle.classList.add('bg-primary-container', 'text-on-primary');
+            if (spanText) {
+              spanText.classList.remove('text-on-surface-variant');
+              spanText.classList.add('text-primary');
+            }
+          } else {
+            circle.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+            circle.classList.remove('bg-primary-container', 'text-on-primary', 'scale-110', 'glow-amber');
+            if (spanText) {
+              spanText.classList.add('text-on-surface-variant');
+              spanText.classList.remove('text-primary-container', 'text-primary');
+            }
+          }
+        });
+
+        if (stepFillLine) {
+          stepFillLine.style.width = ((currentPhase / (totalPhases - 1)) * 100) + '%';
+        }
+
+        if (slideNumLabel) {
+          slideNumLabel.textContent = `PHASE 0${currentPhase + 1} / 0${totalPhases}`;
+        }
+      }
+
+      window.setPhase = function(idx) {
+        currentPhase = (idx + totalPhases) % totalPhases;
+        phaseTimeElapsed = 0;
+        updateUI();
+      };
+
+      window.nextPhase = function() {
+        setPhase(currentPhase + 1);
+      };
+
+      window.prevPhase = function() {
+        setPhase(currentPhase - 1);
+      };
+
+      window.togglePlayPause = function() {
+        isPaused = !isPaused;
+        if (playPauseIcon && playPauseText) {
+          if (isPaused) {
+            playPauseIcon.textContent = 'play_arrow';
+            playPauseText.textContent = 'RESUME';
+          } else {
+            playPauseIcon.textContent = 'pause';
+            playPauseText.textContent = 'PAUSE';
+          }
+        }
+      };
+
+      window.directEntry = function() {
+        if (timer) clearInterval(timer);
+        const mainWrapper = document.querySelector('.relative.z-10');
+        if (mainWrapper) {
+          mainWrapper.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          mainWrapper.style.opacity = '0';
+          mainWrapper.style.transform = 'scale(0.98)';
+        }
+        setTimeout(() => {
+          window.location.href = 'archive.html';
+        }, 550);
+      };
+
+      function tick() {
+        if (!isPaused) {
+          phaseTimeElapsed += intervalTickMs;
+          const progressPct = (phaseTimeElapsed / phaseDurationMs) * 100;
+          const remainingSec = Math.max(0, Math.ceil((phaseDurationMs - phaseTimeElapsed) / 1000));
+
+          if (countdownBar) {
+            countdownBar.style.width = Math.min(progressPct, 100) + '%';
+          }
+          if (countdownText) {
+            countdownText.textContent = `PHASE 0${currentPhase + 1} • AUTO-ADVANCE IN ${remainingSec}s`;
+          }
+
+          if (phaseTimeElapsed >= phaseDurationMs) {
+            phaseTimeElapsed = 0;
+            currentPhase = (currentPhase + 1) % totalPhases;
+            updateUI();
+          }
+        } else {
+          if (countdownText) {
+            countdownText.textContent = `PHASE 0${currentPhase + 1} • STUDY PAUSED (CLICK TO RESUME)`;
+          }
+        }
+      }
+
+      function init() {
+        updateUI();
+        timer = setInterval(tick, intervalTickMs);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</div></main></body></html>
